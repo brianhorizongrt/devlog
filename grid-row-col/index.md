@@ -44,8 +44,6 @@ export const Row = ({ children, gutter = [0, 0] }: RowProps) => {
 };
 ```
 
-&nbsp;
-
 *Col.tsx*
 ```typescript
 import React from "react";
@@ -92,8 +90,6 @@ export const Col = ({ children, xs = 24, sm, md, lg, xl, xxl, ...props }: ColPro
 	);
 };
 ```
-
-&nbsp;
 
 *grid.module.css*
 ```typescript
@@ -705,9 +701,7 @@ export const Col = ({ children, xs = 24, sm, md, lg, xl, xxl, ...props }: ColPro
 }
 ```
 
-&nbsp;
-
-*Usage*
+*Usage:*
 ```typescript
 <Row gutter={[24, 24]}>
 	<Col xs={24} sm={12} md={8}>
