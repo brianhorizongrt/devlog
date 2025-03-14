@@ -3,10 +3,11 @@ title: "Grid Row - Col [Ref: https://ant.design/components/grid]"
 date: "01.01.2025"
 ---
 
-Row and col using css module, a lightweight and efficient solution without using Antd, I just created some basic props
+Row and col using css module, a lightweight and efficient solution without using Antd, I just created some basic props.
+
 &nbsp;
 
-Row.tsx
+*Row.tsx*
 ```typescript
 import React from "react";
 
@@ -45,7 +46,7 @@ export const Row = ({ children, gutter = [0, 0] }: RowProps) => {
 
 &nbsp;
 
-Col.tsx
+*Col.tsx*
 ```typescript
 import React from "react";
 
@@ -94,7 +95,7 @@ export const Col = ({ children, xs = 24, sm, md, lg, xl, xxl, ...props }: ColPro
 
 &nbsp;
 
-grid.module.css
+*grid.module.css*
 ```typescript
 .row {
 	display: flex;
@@ -702,4 +703,18 @@ grid.module.css
 		max-width: 4.166667%;
 	}
 }
+```
+
+&nbsp;
+
+*usage*
+```typescript
+<Row gutter={[24, 24]}>
+	<Col xs={24} sm={12} md={8}>
+		content1
+	</Col>
+	<Col xs={24} sm={12} md={8}>
+		content2
+	</Col>
+</Row>
 ```
