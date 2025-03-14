@@ -707,7 +707,7 @@ export const Col = ({ children, xs = 24, sm, md, lg, xl, xxl, ...props }: ColPro
 
 &nbsp;
 
-*usage*
+*Usage*
 ```typescript
 <Row gutter={[24, 24]}>
 	<Col xs={24} sm={12} md={8}>
