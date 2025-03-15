@@ -1,97 +1,104 @@
 ---
-title: "Grid Row - Col [Ref: https://ant.design/components/grid]"
+title: "Grid Row - Col"
 date: "01.01.2025"
 ---
+
+[Ref: https://ant.design/components/grid](https://ant.design/components/grid)
+
+&nbsp;
 
 Row and col using css module, a lightweight and efficient solution without using Antd, I just created some basic props.
 
 &nbsp;
 
-*Row.tsx*
+_Row.tsx_
+
 ```typescript
 import React from "react";
 
 import s from "./grid.module.css";
 
 type RowProps = {
-	children: React.ReactNode;
-	gutter?: [number, number];
+    children: React.ReactNode;
+    gutter?: [number, number];
 };
 
 export const Row = ({ children, gutter = [0, 0] }: RowProps) => {
-	const [horizontal, vertical] = gutter;
+    const [horizontal, vertical] = gutter;
 
-	return (
-		<div
-			className={s.row}
-			style={{
-				marginInline: -horizontal / 2,
-				rowGap: vertical,
-			}}
-		>
-			{React.Children.map(children, (child) => {
-				if (!React.isValidElement(child)) return child;
-				return React.cloneElement(child, {
-					...child.props,
-					style: {
-						...child.props.style,
-						paddingInline: horizontal / 2,
-					},
-				});
-			})}
-		</div>
-	);
+    return (
+        <div
+            className={s.row}
+            style={{
+                marginInline: -horizontal / 2,
+                rowGap: vertical,
+            }}
+        >
+            {React.Children.map(children, (child) => {
+                if (!React.isValidElement(child)) return child;
+                return React.cloneElement(child, {
+                    ...child.props,
+                    style: {
+                        ...child.props.style,
+                        paddingInline: horizontal / 2,
+                    },
+                });
+            })}
+        </div>
+    );
 };
 ```
 
-*Col.tsx*
+_Col.tsx_
+
 ```typescript
 import React from "react";
 
 import s from "./grid.module.css";
 
 type ColProps = {
-	children?: React.ReactNode;
-	xs?: number;
-	sm?: number;
-	md?: number;
-	lg?: number;
-	xl?: number;
-	xxl?: number;
+    children?: React.ReactNode;
+    xs?: number;
+    sm?: number;
+    md?: number;
+    lg?: number;
+    xl?: number;
+    xxl?: number;
 } & Omit<React.HTMLAttributes<HTMLDivElement>, "children">;
 
 const sizes = ["xs", "sm", "md", "lg", "xl", "xxl"] as const;
 
 export const Col = ({ children, xs = 24, sm, md, lg, xl, xxl, ...props }: ColProps) => {
-	const getValueForBreakpoint = (breakpointIndex: number): number | undefined => {
-		for (let i = breakpointIndex; i >= 0; i--) {
-			const size = sizes[i];
-			const value = size === "xs" ? xs : { sm, md, lg, xl, xxl }[size];
-			if (value !== undefined && value >= 0 && value <= 24) {
-				return value;
-			}
-		}
-		return undefined;
-	};
+    const getValueForBreakpoint = (breakpointIndex: number): number | undefined => {
+        for (let i = breakpointIndex; i >= 0; i--) {
+            const size = sizes[i];
+            const value = size === "xs" ? xs : { sm, md, lg, xl, xxl }[size];
+            if (value !== undefined && value >= 0 && value <= 24) {
+                return value;
+            }
+        }
+        return undefined;
+    };
 
-	const sizeClasses = sizes
-		.map((size, index) => {
-			const value = getValueForBreakpoint(index);
-			if (value === undefined) return "";
-			return s[`col-${size}-${value}`];
-		})
-		.filter(Boolean)
-		.join(" ");
+    const sizeClasses = sizes
+        .map((size, index) => {
+            const value = getValueForBreakpoint(index);
+            if (value === undefined) return "";
+            return s[`col-${size}-${value}`];
+        })
+        .filter(Boolean)
+        .join(" ");
 
-	return (
-		<div className={`${s.col} ${sizeClasses}`.trim()} {...props}>
-			{children}
-		</div>
-	);
+    return (
+        <div className={`${s.col} ${sizeClasses}`.trim()} {...props}>
+            {children}
+        </div>
+    );
 };
 ```
 
-*grid.module.css*
+_grid.module.css_
+
 ```typescript
 .row {
 	display: flex;
@@ -701,14 +708,15 @@ export const Col = ({ children, xs = 24, sm, md, lg, xl, xxl, ...props }: ColPro
 }
 ```
 
-*Usage:*
+_Usage:_
+
 ```typescript
 <Row gutter={[24, 24]}>
-	<Col xs={24} sm={12} md={8}>
-		content1
-	</Col>
-	<Col xs={24} sm={12} md={8}>
-		content2
-	</Col>
+    <Col xs={24} sm={12} md={8}>
+        content1
+    </Col>
+    <Col xs={24} sm={12} md={8}>
+        content2
+    </Col>
 </Row>
 ```
